@@ -1,0 +1,6 @@
+modern,nunc,modernus,novus,novitas,modernitas,modernitat-
+romanness,Romuleus,Romule-,Quirites,Quiris,Quirit-,Quirinalis,Quirinal-,Roma,Rom-,Romanus,Roman-,Latialis,Latial-,Latinus,Latin,Latinitas,Latinitat-,Romanicus,Romanic- ,Romanulus,Romanul-,Romaniensis,Romaniens-,Romulius,Romuli-,Romilius,Romili-
+greekness,Graecus,Graec-,Graeculus,Graecul-,Atticus,Attic-
+gothness,Hamalus,Hamal-,Amalus,Amal-,Gothus,Goth-,Gothicus,Gothic-,Getae,Get-,Gepidae,Gepid- ,Gothicus,Gothic-
+antiquity,Vetus,Veter-,Vetustas,Vetustat-,Antiquitas,Antiquitat-,Antiquus,Antiqu-,Antiquitus,Antiquit-,Antiquarius,Antiquar-,Veternus,Vetern-,Senex,Sen-,Senectus,Senectut-,Priscus,Prisc-
+liberty,Libertas,Libertat-,Liber,Liber-
