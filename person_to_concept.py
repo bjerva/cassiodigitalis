@@ -7,16 +7,16 @@ Map person-concept relations
 import numpy as np
 from scipy.spatial.distance import cdist, cosine
 from sklearn.preprocessing import normalize
-import cPickle
+import pickle
 from sys import argv
 from collections import defaultdict
 
 
 def read_w2vec(fname):
-    with open(argv[1]+'.pickle', 'rb') as in_f:
-        words = cPickle.load(in_f)
+    with open(fname+'.pickle', 'rb') as in_f:
+        words = pickle.load(in_f)
 
-    vectors = np.load(argv[1]+'.npy')
+    vectors = np.load(fname+'.npy')
 
     return words, vectors
 
@@ -57,8 +57,8 @@ if __name__ == '__main__':
     poi, poi_vecs = read_poi(argv[2], vectors, words_to_idx)
     concepts, concept_vecs = read_concepts(argv[3], vectors, words_to_idx)
 
-    print poi
-    print concepts
+    print(poi)
+    print(concepts)
 
     distance_dict = defaultdict(list)
     for idx, poi_vec in enumerate(poi_vecs):
@@ -87,7 +87,7 @@ if __name__ == '__main__':
                 header += concept + '\t'
             header += '\n'
             output.append(header)
-        print key, sorted(value, key=lambda x:x[1])
+        print(key, sorted(value, key=lambda x:x[1]))
         rep = key
         dists = [distance for concept, distance in sorted(value, key=lambda x:x[0])]
         dists = [distance if distance > 0.4 else max(dists)+0.1 for distance in dists]
@@ -97,8 +97,8 @@ if __name__ == '__main__':
         norm = 1 - norm
         norm = norm / sum(norm)
         norm = 1 - norm
-        print dists
-        print norm
+        print(dists)
+        print(norm)
         for idx, (concept, distance) in enumerate(sorted(value, key=lambda x:x[0])):
             rep += '\t{0}'.format(norm[idx])
 
@@ -106,7 +106,7 @@ if __name__ == '__main__':
         output.append(rep)
 
 
-    print len(output[0].split('\t'))
+    print(len(output[0].split('\t')))
     with open(argv[4], 'w') as out_f:
         #out_f.write('person\t')
         #for i in xrange((len(output[0].split('\t'))-1) / 2):

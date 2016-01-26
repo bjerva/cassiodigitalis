@@ -24,14 +24,20 @@ def swap2(data):
 
     return data
 
-if __name__ == '__main__' and len(argv) == 3:
+if __name__ == '__main__':
 
     out_fname = argv[1]
-    grp_number = argv[2]
+    if len(argv) == 3:
+        grp_number = argv[2]
 
-    group1 = 'Alaricus, Odovacer, Theodericus, Athalaricus, Theodahadus, Anastasius, Iustinianus, Theodora'.lower().split(', ')
-    group2 = 'Agapetus, Cassiodorus, Liberius, Symmachus, Boethius, Patricius'.lower().split(', ')
-    current_group = group1 if grp_number == '1' else group2
+        group1 = 'Alaricus, Odovacer, Theodericus, Athalaricus, Theodahadus, Anastasius, Iustinianus, Theodora'.lower().split(', ')
+        group2 = 'Agapetus, Cassiodorus, Liberius, Symmachus, Boethius, Patricius'.lower().split(', ')
+        current_group = group1 if grp_number == '1' else group2
+    elif len(argv) == 2:
+        grp_number = 3
+        current_group = 'Vergilius, Cicero'.lower().split(', ')
+    else:
+        print 'Usage: python plot_heatmap.py <poi_scores_file> <group number>'
 
     with open(out_fname, 'r') as in_f:
         in_f.readline()
@@ -43,6 +49,7 @@ if __name__ == '__main__' and len(argv) == 3:
             if fields[0] in current_group:
                 labels.append(fields[0])
                 data.append([float(i) for i in fields[1:]])
+
 
     # Reorder columns
     header = swap(header)
@@ -56,6 +63,3 @@ if __name__ == '__main__' and len(argv) == 3:
         )
     ])
     plot_url = py.plot(data, filename='cassiodigitalis-person-concept-mapping-{0}'.format(grp_number))
-
-else:
-    print 'Usage: python plot_heatmap.py <poi_scores_file> <group number>'
