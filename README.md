@@ -1,5 +1,9 @@
 # cassiodigitalis
 
+This archive contains the code used in 'Word Embeddings Pointing the Way for Late Antiquity' within the Cassiodigitalis project (http://aclweb.org/anthology/W/W15/W15-3708.pdf).
+
+If you intend to use this code, please let me know and be aware that some clean-up would be in order.
+
 TODO:
  * Clean up code
  * Document code
