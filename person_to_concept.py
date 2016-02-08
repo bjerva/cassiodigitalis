@@ -13,7 +13,7 @@ from collections import defaultdict
 
 
 def read_w2vec(fname):
-    with open(fname+'.pickle', 'rb') as in_f:
+    with open(fname+'.pkl', 'rb') as in_f:
         words = pickle.load(in_f)
 
     vectors = np.load(fname+'.npy')
@@ -34,14 +34,14 @@ def read_poi(fname, vectors, words_to_idx):
 
     return poi, poi_vecs
 
+
 def read_concepts(fname, vectors, words_to_idx):
     concepts = defaultdict(list)
     concepts_vecs = defaultdict(list)
     with open(fname, 'r') as in_f:
         for line in in_f:
             fields = line.lower().strip().split(',')
-            #print fields
-            #raw_input()
+
             concepts[fields[0]] = [word for word in fields[1:] if word in words_to_idx]
             for word in concepts[fields[0]]:
                 concepts_vecs[fields[0]].append(vectors[words_to_idx[word]])
@@ -75,8 +75,13 @@ if __name__ == '__main__':
 
             mean = sum(dists) / len(dists)
             minim = min(dists)
+            maxim = max(dists)
+            if maxim > 1:
+                maxim = 0.999
+            elif maxim < 0:
+                maxim = 0.001
 
-            distance_dict[current_poi].append((key, minim))
+            distance_dict[current_poi].append((key, mean))
 
 
     output = []
@@ -90,13 +95,13 @@ if __name__ == '__main__':
         print(key, sorted(value, key=lambda x:x[1]))
         rep = key
         dists = [distance for concept, distance in sorted(value, key=lambda x:x[0])]
-        dists = [distance if distance > 0.4 else max(dists)+0.1 for distance in dists]
+        #dists = [distance if distance > 0.4 else max(dists)+0.1 for distance in dists]
         dists = np.asarray(dists)
-        dists = np.log2(dists)
+        #dists = np.log2(dists)
         norm = dists / sum(dists)
-        norm = 1 - norm
-        norm = norm / sum(norm)
-        norm = 1 - norm
+        #norm = 1 - norm
+        #norm = norm / sum(norm)
+        #norm = 1 - norm
         print(dists)
         print(norm)
         for idx, (concept, distance) in enumerate(sorted(value, key=lambda x:x[0])):
