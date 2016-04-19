@@ -9,6 +9,8 @@ import plotly.plotly as py
 from plotly.graph_objs import *
 from sys import argv
 
+py.sign_in('username', 'api-key')
+
 def swap(data):
     tmp = data[4][:]
     data[4] = data[0][:]
@@ -37,7 +39,7 @@ if __name__ == '__main__':
         grp_number = 3
         current_group = 'Vergilius, Cicero'.lower().split(', ')
     else:
-        print 'Usage: python plot_heatmap.py <poi_scores_file> <group number>'
+        print('Usage: python plot_heatmap.py <poi_scores_file> <group number>')
 
     with open(out_fname, 'r') as in_f:
         in_f.readline()
